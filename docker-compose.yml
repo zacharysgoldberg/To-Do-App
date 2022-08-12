@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  web:
+    build: ./app
+    restart: always
+    volumes:
+      - "./app:/usr/src/app"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  nginx:
+    build: ./app/nginx
+    volumes:
+      - "${PWD}:/etc/nginx/templates"
+    ports:
+      - 8080:80
+    depends_on:
+      - web
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: todos
+      PGUSER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - "${PWD}:/app/todo_app/psql"

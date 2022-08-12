@@ -1,2 +1,6 @@
 uvenv
-venv
+**__pycache__/
+.env
+**.vscode
+todos.db
+**company/
