@@ -1,4 +1,4 @@
-# todos-app
+# Todos-App
 
 ## Description
 Simple Todo application to practice using FastAPI and Nginx.
