@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - image: zgtodoappregistry.azurecr.io/todo-app:v1
+          name: todo-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_HOST
+              value: "todoapp-server.postgres.database.azure.com"
+            - name: DATABASE_USER
+              value: "wornoutparrot6"
+            - name: DATABASE_PASSWORD
+              value: "vDV61sxUI8QjXAuVMtFdPw!"
+            - name: DATABASE_NAME
+              value: "todo-app"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - todo-app
+              topologyKey: "kubernetes.io/hostname"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-server
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8000
+  selector:
+    app: todo-app

@@ -7,7 +7,7 @@ from database import engine, get_db
 from pydantic import BaseModel
 from models import Users, Base
 from fastapi import APIRouter, Depends, Request, Form
-from .auth import get_current_user, hash_password, verify_password
+from utils.security import get_current_user, hash_password, verify_password
 import sys
 sys.path.append("..")
 
@@ -28,7 +28,7 @@ class UserVerification(BaseModel):
     username: str
     password: str
     new_password: str
-
+    
 
 @router.get("/update-user", response_class=HTMLResponse)
 async def update_password_view(request: Request):
@@ -59,6 +59,7 @@ async def update_password(request: Request, username: str = Form(...),
 
             db.add(user_data)
             db.commit()
+            
             msg = "Password updated"
 
     return templates.TemplateResponse("update-user.html",

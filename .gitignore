@@ -1,4 +1,4 @@
-uvenv
+venv
 **__pycache__/
 .env
 **.vscode

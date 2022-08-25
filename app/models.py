@@ -12,6 +12,7 @@ class Users(Base):
     first_name = Column(String, nullable=True)
     last_name = Column(String, nullable=True)
     password = Column(String, nullable=False)
+    reset_token = Column(String, nullable=True)
 
     todos = relationship('Todos', cascade="all, delete",
                          back_populates='users')

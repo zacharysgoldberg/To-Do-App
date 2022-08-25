@@ -1,14 +1,14 @@
 from fastapi import FastAPI, Depends
 from models import Base
 from database import engine
-from routers import auth, todos, users
+from routers import auth, todos, users, forgot_password, register
 from starlette.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from starlette import status
 
 app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -20,3 +20,5 @@ async def root():
 app.include_router(auth.router)
 app.include_router(todos.router)
 app.include_router(users.router)
+app.include_router(forgot_password.router)
+app.include_router(register.router)

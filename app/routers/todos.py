@@ -4,7 +4,7 @@ from starlette import status
 from models import Todos, Base
 from database import engine, get_db
 from sqlalchemy.orm import Session
-from .auth import get_current_user
+from utils.security import get_current_user
 
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
