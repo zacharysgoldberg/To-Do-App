@@ -1,9 +1,9 @@
-# Todo-App
+# To-Do App
 
 ## Description
 
-Simple Todo application to practice using FastAPI and Nginx.
+Simple To-do application to practice using FastAPI and Nginx.
 
 ## Design
 
-FastAPI backend service, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker and Kubernetes.
+FastAPI backend service, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker and Kubernetes deployment.
