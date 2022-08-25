@@ -1,4 +1,4 @@
-# To-Do-App
+# To-Do App
 
 ## Description
 Simple Todo application to practice using FastAPI and Nginx.
