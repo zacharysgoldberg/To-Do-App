@@ -84,7 +84,7 @@ spec:
             #   valueFrom:
             #     secretKeyRef:
             #       key: external_ip
-            #       name: to-do-app-secrets
+            #       name: todo-app-secrets
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
