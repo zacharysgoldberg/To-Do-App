@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple To-do application to practice using FastAPI and Nginx.
+Simple To-do application to practice using FastAPI, Nginx, and Kubernetes.
 
 ## Design
 

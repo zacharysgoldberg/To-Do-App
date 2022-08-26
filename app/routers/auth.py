@@ -1,18 +1,13 @@
 from fastapi import Depends, HTTPException, status, APIRouter, Request, Response, Form
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from database import get_db, engine
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from datetime import datetime, timedelta
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
-from utils.security import authenticate_user, create_access_token, LoginForm
-
-
-templates = Jinja2Templates(directory="templates")
-
-bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from utils.security import authenticate_user, create_access_token
+from utils.schemas import LoginForm
+from . import templates
 
 # Base.metadata.create_all(bind=engine)
 
@@ -68,7 +63,7 @@ async def login(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get('/logout')
-async def logout(request: Request, db: Session = Depends(get_db)):
+async def logout(request: Request):
     msg = "Logout Successful"
     response = templates.TemplateResponse(
         "login.html", {"request": request, "msg": msg})

@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, APIRouter, Request, Response, Form
+from fastapi import Depends, HTTPException, Request
 from typing import Optional
 from models import Users
 from passlib.context import CryptContext
@@ -7,7 +7,6 @@ from database import get_db
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from routers import auth
-from utils.schemas import LoginForm
 
 SECRET_KEY = '3K75JD2JKDS99U342YINQ0'
 

@@ -2,6 +2,7 @@ from fastapi import Request
 from typing import Optional
 from pydantic import BaseModel
 
+
 class LoginForm:
     def __init__(self, request: Request):
         self.request: Request = request
@@ -12,10 +13,15 @@ class LoginForm:
         form = await self.request.form()
         self.username = form.get('email')
         self.password = form.get('password')
-        
-        
-        
+
+
 class ResetPassword(BaseModel):
     email: str
     new_password: str
     confirm_password: str
+
+
+class UserVerification(BaseModel):
+    username: str
+    password: str
+    new_password: str

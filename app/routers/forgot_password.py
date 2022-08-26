@@ -7,10 +7,7 @@ from .auth import templates
 from utils.send_email import send_email
 from utils.security import hash_password
 import uuid
-from python_dotenv import load_dotenv
 import os
-
-load = load_dotenv()
 
 router = APIRouter(
     prefix='/auth',
@@ -78,6 +75,7 @@ async def reset_password(request: Request, reset_token: str, new_password: str =
     if user_data:
         if new_password == confirm_password:
             user_data.password = hash_password(new_password)
+            user_data.reset_token = None
 
             db.add(user_data)
             db.commit()

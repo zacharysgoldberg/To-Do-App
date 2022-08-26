@@ -1,11 +1,10 @@
 from starlette import status
-from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from starlette.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from database import engine, get_db
-from pydantic import BaseModel
 from models import Users, Base
+from . import templates
 from fastapi import APIRouter, Depends, Request, Form
 from utils.security import get_current_user, hash_password, verify_password
 import sys
@@ -18,17 +17,8 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-
 # Base.metadata.create_all(bind=engine)
 
-templates = Jinja2Templates(directory="templates")
-
-
-class UserVerification(BaseModel):
-    username: str
-    password: str
-    new_password: str
-    
 
 @router.get("/update-user", response_class=HTMLResponse)
 async def update_password_view(request: Request):
@@ -59,7 +49,7 @@ async def update_password(request: Request, username: str = Form(...),
 
             db.add(user_data)
             db.commit()
-            
+
             msg = "Password updated"
 
     return templates.TemplateResponse("update-user.html",

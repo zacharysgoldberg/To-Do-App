@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
+from sqlalchemy import Boolean, Column, Integer, DateTime, String, ForeignKey
+from datetime import datetime
 from database import Base
 from sqlalchemy.orm import relationship
 
@@ -14,18 +15,19 @@ class Users(Base):
     password = Column(String, nullable=False)
     reset_token = Column(String, nullable=True)
 
-    todos = relationship('Todos', cascade="all, delete",
+    todos = relationship('ToDos', cascade="all, delete",
                          back_populates='users')
 
 
-class Todos(Base):
+class ToDos(Base):
     __tablename__ = 'todos'
 
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     title = Column(String, nullable=False)
     description = Column(String, nullable=True)
-    priority = Column(Integer)
+    priority = Column(Integer, nullable=False)
     complete = Column(Boolean, default=False, nullable=False)
+    date = Column(DateTime, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'))
 
     users = relationship('Users', back_populates='todos')
