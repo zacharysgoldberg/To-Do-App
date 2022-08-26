@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="card">
-    <div class="card-header">Let's edit your todo!</div>
+    <div class="card-header">Let's edit your ToDo!</div>
     <div class="card-body">
       <form method="POST">
         <div class="form-group">
@@ -24,7 +24,7 @@
             <option {% if todo.priority == 5 %} selected="selected" {% endif %}>5</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Edit your todo</button>
+        <button type="submit" class="btn btn-primary">Edit your ToDo</button>
         <button onclick="window.location.href='/todos/delete/{{todo.id}}'" type="button"
           class="btn btn-danger">Delete</button>
       </form>
