@@ -10,7 +10,7 @@ app = FastAPI()
 
 # Base.metadata.create_all(bind=engine)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
 
 @app.get("/")
 async def root():

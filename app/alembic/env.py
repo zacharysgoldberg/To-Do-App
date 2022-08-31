@@ -29,7 +29,7 @@ target_metadata = Base.metadata
 
 
 def get_url():
-    return f"postgresql://{os.getenv('DATABASE_USER')}:{os.getenv('DATABASE_PASSWORD')}@{os.getenv('DATABASE_HOST')}/{os.getenv('DATABASE_NAME')}?sslmode=require"
+    return os.getenv('DATABASE_URI')
 
 
 def run_migrations_offline() -> None:
@@ -45,8 +45,8 @@ def run_migrations_offline() -> None:
 
     """
 
-    url = config.get_main_option("sqlalchemy.url")
-    # url = get_url()
+    # url = config.get_main_option("sqlalchemy.url")
+    url = get_url()
 
     context.configure(
         url=url,
@@ -67,13 +67,13 @@ def run_migrations_online() -> None:
 
     """
 
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    # connectable = engine_from_config(
+    #     config.get_section(config.config_ini_section),
+    #     prefix="sqlalchemy.",
+    #     poolclass=pool.NullPool,
+    # )
 
-    # connectable = create_engine(get_url())
+    connectable = create_engine(get_url())
 
     with connectable.connect() as connection:
         context.configure(

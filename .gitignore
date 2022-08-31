@@ -5,3 +5,7 @@ venv
 todos.db
 **company/
 backend-secrets.yaml
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
