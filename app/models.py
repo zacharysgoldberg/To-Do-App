@@ -27,7 +27,7 @@ class ToDos(Base):
     description = Column(String, nullable=True)
     priority = Column(Integer, nullable=False)
     complete = Column(Boolean, default=False, nullable=False)
-    date = Column(DateTime, nullable=True)
+    # date = Column(DateTime, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'))
 
     users = relationship('Users', back_populates='todos')

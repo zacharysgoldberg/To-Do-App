@@ -29,7 +29,7 @@ target_metadata = Base.metadata
 
 
 def get_url():
-    return os.getenv('DATABASE_URI')
+    return "postgresql://zgtodoapp:Usmc2941!@awseb-e-xdevemzmtu-stack-awsebrdsdatabase-alxo7dxx0wwo.caf07lihg7ag.us-west-1.rds.amazonaws.com/ebdb"
 
 
 def run_migrations_offline() -> None:
