@@ -42,7 +42,6 @@ async def add_new_todo(request: Request):
 async def create_todo(request: Request, title: str = Form(...),
                       description: str = Form(...),
                       priority: int = Form(...),
-                      date: str = Form(...),
                       db: Session = Depends(get_db)):
     user = await get_current_user(request)
     if user is None:
@@ -53,9 +52,6 @@ async def create_todo(request: Request, title: str = Form(...),
     todo_model.description = description
     todo_model.priority = priority
     todo_model.complete = False
-
-    datetime.strptime(date, "%Y-%m-%d")
-    todo_model.date = date
 
     todo_model.user_id = user.get('id')
 
@@ -81,7 +77,6 @@ async def edit_todo_commit(request: Request, todo_id: int,
                            title: str = Form(...),
                            description: str = Form(...),
                            priority: int = Form(...),
-                           date: str = Form(...),
                            db: Session = Depends(get_db)):
     user = await get_current_user(request)
     if user is None:
@@ -92,9 +87,6 @@ async def edit_todo_commit(request: Request, todo_id: int,
     todo_model.title = title
     todo_model.description = description
     todo_model.priority = priority
-
-    datetime.strptime(date, "%Y-%m-%d")
-    todo_model.date = date
 
     db.add(todo_model)
     db.commit()
