@@ -40,7 +40,7 @@ def upgrade() -> None:
                     sa.Column('description', sa.String(), nullable=True),
                     sa.Column('priority', sa.Integer(), nullable=False),
                     sa.Column('complete', sa.Boolean(), nullable=False),
-                    # sa.Column('date', sa.DateTime(), nullable=True),
+                    sa.Column('date', sa.Date(), nullable=True),
                     sa.Column('user_id', sa.Integer(), nullable=True),
                     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
                     sa.PrimaryKeyConstraint('id')

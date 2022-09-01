@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, DateTime, String, ForeignKey
+from sqlalchemy import Boolean, Column, Integer, Date, String, ForeignKey
 from datetime import datetime
 from database import Base
 from sqlalchemy.orm import relationship
@@ -27,7 +27,7 @@ class ToDos(Base):
     description = Column(String, nullable=True)
     priority = Column(Integer, nullable=False)
     complete = Column(Boolean, default=False, nullable=False)
-    # date = Column(DateTime, nullable=True)
+    date = Column(Date, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'))
 
     users = relationship('Users', back_populates='todos')
