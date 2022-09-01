@@ -29,7 +29,7 @@ target_metadata = Base.metadata
 
 
 def get_url():
-    return "postgresql://postgres@localhost:5432/todo-app"
+    return os.getenv('DATABASE_URI')
 
 
 def run_migrations_offline() -> None:
