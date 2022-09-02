@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple To-do list application to practice using FastAPI, Nginx, and Kubernetes.
+Simple To-do list application utilizing FastAPI, Nginx, and Kubernetes.
 
 ## Design
 
