@@ -1,14 +1,14 @@
 version: "3.8"
 services:
-  # web:
-  #   build: ./app
-  #   restart: always
-  #   volumes:
-  #     - "./app:/usr/src/app"
-  #   ports:
-  #     - 8000:8000
-  #   depends_on:
-  #     - db
+  web:
+    build: ./app
+    restart: always
+    volumes:
+      - "./app:/usr/src/app"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
 
   # nginx:
   #   build: ./app/nginx

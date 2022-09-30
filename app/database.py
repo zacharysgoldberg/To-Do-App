@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 # AZURE_DATABASE_URL = f"postgresql://{os.getenv('DATABASE_USER')}:{os.getenv('DATABASE_PASSWORD')}@{os.getenv('DATABASE_HOST')}/{os.getenv('DATABASE_NAME')}?sslmode=require"
-EB_DATABASE_URI = os.getenv('DATABASE_URI', "postgresql://postgres@localhost:5432/todo-app")
+EB_DATABASE_URI = os.getenv('DATABASE_URI')
 
 # connect_args={"check_same_thread": False} [for Sqlite only]
 engine = create_engine(EB_DATABASE_URI)

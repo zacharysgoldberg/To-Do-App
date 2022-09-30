@@ -2,11 +2,15 @@ branch-defaults:
   main:
     environment: todo-app-env
     group_suffix: null
+environment-defaults:
+  todo-app-env:
+    branch: null
+    repository: null
 global:
   application_name: ToDo App
   branch: null
   default_ec2_keyname: primary
-  default_platform: Python 3.8 running on 64bit Amazon Linux 2
+  default_platform: Docker running on 64bit Amazon Linux 2
   default_region: us-west-1
   include_git_submodules: true
   instance_profile: null
