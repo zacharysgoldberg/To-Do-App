@@ -10,4 +10,4 @@ FastAPI backend service, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic
 
 ## Hosted on AWS (Elastic Beanstalk)
 
-[http://todo-app-env.eba-fzfvvr6j.us-west-1.elasticbeanstalk.com/](http://todo-app-env.eba-fzfvvr6j.us-west-1.elasticbeanstalk.com/)
+[http://todo-app-env.eba-fzfvvr6j.us-west-1.elasticbeanstalk.com/](http://todo-app-env.us-west-1.elasticbeanstalk.com/)
