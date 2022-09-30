@@ -2,11 +2,11 @@
 
 ## Description
 
-Simple To-do list application to practice using FastAPI, Nginx, and Kubernetes.
+Simple To-do list application.
 
 ## Design
 
-FastAPI backend service, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker and Kubernetes deployment.
+FastAPI backend, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker and Kubernetes deployment.
 
 ## Hosted on AWS (Elastic Beanstalk)
 
