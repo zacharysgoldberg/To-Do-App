@@ -2,8 +2,8 @@ FROM python:3.9
 
 RUN apt-get update && apt-get upgrade -y
 
-EXPOSE 80
-EXPOSE 443
+# EXPOSE 80
+# EXPOSE 443
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
