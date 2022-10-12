@@ -1,6 +1,6 @@
 FROM python:3.9-alpine
 
-RUN apt-get update && apt-get upgrade -y
+# RUN apt-get update && apt-get upgrade -y
 
 # EXPOSE 80
 # EXPOSE 443

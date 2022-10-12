@@ -1,6 +1,6 @@
 branch-defaults:
   main:
-    environment: todo-app-env
+    environment: todoapp-env
     group_suffix: null
 environment-defaults:
   todo-app-env:
