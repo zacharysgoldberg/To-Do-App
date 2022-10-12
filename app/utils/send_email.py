@@ -13,8 +13,9 @@ conf = ConnectionConfig(
     MAIL_SERVER=os.getenv("MAIL_SERVER"),
     MAIL_TLS=os.getenv("MAIL_TLS"),
     MAIL_SSL=os.getenv("MAIL_SSL"),
-    USE_CREDENTIALS=os.getenv("USE_CREDENTIALS"),
+    USE_CREDENTIALS=os.getenv("USE_CREDENTIALS")
 )
+
 
 # Sending email
 
