@@ -4,7 +4,7 @@ FROM python:3.9
 
 # EXPOSE 80
 # EXPOSE 443
-# EXPOSE 8000
+EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -21,3 +21,4 @@ WORKDIR /app
 COPY . /app
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker"]
+
