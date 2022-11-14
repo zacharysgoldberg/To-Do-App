@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple To-do list application.
+To-do list application.
 
 ## Design
 
