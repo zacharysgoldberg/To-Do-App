@@ -6,7 +6,7 @@ To-do list application.
 
 ## Design
 
-FastAPI backend, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker, and Kubernetes deployment manifests.
+FastAPI backend, bootstrap frontend, PostgreSQL with SQLAlchemy, Alembic, Nginx as a reverse proxy, Docker, and Kubernetes manifests.
 
 ## Hosted on AWS
 
