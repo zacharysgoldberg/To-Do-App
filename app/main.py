@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 # from models import Base
 # from database import engine
 from routers import auth, todos, users, forgot_password, register
@@ -10,13 +11,13 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 # Base.metadata.create_all(bind=engine)
 

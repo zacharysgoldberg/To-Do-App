@@ -1,3 +1,4 @@
+from fastapi import BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 from dotenv import load_dotenv
 import os
@@ -25,7 +26,7 @@ async def send_email(subject: str, recipient, message: str):
         subject=subject,
         recipients=recipient,
         body=message,
-        subtype="html"
+        subtype='text'
     )
 
     fm = FastMail(conf)

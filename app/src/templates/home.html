@@ -2,15 +2,14 @@
 
 <div class="container">
   <div class="card text-center">
-    <div class="card-header">Your ToDos!</div>
+    <a class="card-header" href="calendar">Calendar View</a>
     <div class="card-body">
       <div>
-        <a href="calendar">Calendar View</a>
       </div>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Priority</th>
             <th scope="col">Title</th>
             <th scope="col">Date</th>
             <th scope="col">Actions</th>
@@ -22,7 +21,7 @@
           {% if todo.complete == False %}
           <tr class="pointer">
 
-            <td>{{loop.index}}</td>
+            <td>{{todo.priority}}</td>
             <td>{{todo.title}}</td>
             <td>{{todo.date}}</td>
             <td>
@@ -54,7 +53,7 @@
         </tbody>
       </table>
 
-      <a href="add-todo" class="btn btn-primary">Add a new ToDo!</a>
+      <a href="add-todo" class="btn btn-primary">Add ToDo</a>
     </div>
   </div>
 </div>

@@ -7,10 +7,10 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 
-# AZURE_DATABASE_URL = f"postgresql://{os.getenv('DATABASE_USER')}:{os.getenv('DATABASE_PASSWORD')}@{os.getenv('DATABASE_HOST')}/{os.getenv('DATABASE_NAME')}?sslmode=require"
-EB_DATABASE_URI = os.getenv('DATABASE_URI')
+# EB_DATABASE_URI = os.getenv('DATABASE_URI')
+DEV_DB = os.getenv('DEV_DB')
 # connect_args={"check_same_thread": False} [for Sqlite only]
-engine = create_engine(EB_DATABASE_URI)
+engine = create_engine(DEV_DB)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

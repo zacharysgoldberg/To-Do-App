@@ -7,7 +7,7 @@ from .auth import templates
 from utils.send_email import send_email
 from utils.security import hash_password, create_access_token
 from datetime import timedelta
-import uuid
+from fastapi import BackgroundTasks
 import os
 
 router = APIRouter(
@@ -37,23 +37,9 @@ async def forgot_password(request: Request, email: str = Form(...),
 
         subject = "Hello"
         recipient = [email]
-        message = """
-        <!DOCTYPE html>
-        <html>
-        <title>Reset Password</title>
-        <body>
-        <div style="width:100%;font-family: monospace;">
-            <h2>Hello, {0:}</h2>
-            <p>Someone has requested a link to reset your password. If you requested this, you can change your password through the link provided below.</p>
-            <a href="http://{1:}/auth/reset-password/?reset_token={2:}" style="box-sizing:border-box;border-color:#1f8feb;border:solid 1px #1f8feb;border-radius:4px;color:#ffffff;font-size:16px;font-weight:bold;margin:0;padding:12px text-transform:capitalize">Reset Your Password</a>
-            <p>If you did not request this, you can ignore this email.</p>
-            <p>Your password will not change until you access the link above and create a new one.</p>
-        </div>
-        </body>
-        </html>
-        """.format(email, os.getenv('EXTERNAL_IP'), reset_token)
+        msg = f"Hello, {email}\n\nA request has been made to reset your password.\nIf this was not made by you, please ignore this message.\nOtherwise, go ahead and follow the link below.\nhttp://{os.getenv('EXTERNAL_IP')}/auth/reset-password/?reset_token={reset_token}\nYour password will not change until you access the link above and create a new one."
 
-        await send_email(subject, recipient, message)
+        await send_email(subject, recipient, msg)
 
         user.reset_token = reset_token
         db.add(user)
@@ -68,15 +54,11 @@ async def reset_password_view(request: Request, reset_token: str):
     return templates.TemplateResponse("reset-password.html", {'request': request, 'reset_token': reset_token})
 
 
-@router.post('/reset-password/{reset_token}', response_class=HTMLResponse)
+@router.post('/reset-password/', response_class=HTMLResponse)
 async def reset_password(request: Request, reset_token: str, new_password: str = Form(...),
                          confirm_password: str = Form(...), db: Session = Depends(get_db)):
     user = db.query(Users).filter(
         Users.reset_token == reset_token).first()
-
-    print("===================")
-    print(reset_token)
-    print("===================")
 
     if user:
         if new_password == confirm_password:

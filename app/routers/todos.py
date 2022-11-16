@@ -1,13 +1,13 @@
 from fastapi import Depends, HTTPException, APIRouter, Request, Form
 from starlette.responses import RedirectResponse
 from starlette import status
-from models import ToDos, Base
+from models import ToDos, Base, Users
 from database import engine, get_db
 from sqlalchemy.orm import Session
 from utils.security import get_current_user
 from datetime import datetime
 from . import templates
-
+from .reminder import reminder
 from fastapi.responses import HTMLResponse
 
 router = APIRouter(
@@ -76,6 +76,10 @@ async def create_todo(request: Request, title: str = Form(...),
 
     db.add(todo_model)
     db.commit()
+
+    # email = db.query(Users.email).filter(
+    #     Users.username == user['username']).first()
+    # reminder(date, email, title)
 
     return RedirectResponse(url="/todos", status_code=status.HTTP_302_FOUND)
 

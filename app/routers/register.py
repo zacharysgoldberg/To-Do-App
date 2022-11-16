@@ -12,6 +12,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+
 @router.get('/register', response_class=HTMLResponse)
 async def register(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
