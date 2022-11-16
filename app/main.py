@@ -1,16 +1,27 @@
-from fastapi import FastAPI, Depends
-from models import Base
-from database import engine
+from fastapi import FastAPI
+# from models import Base
+# from database import engine
 from routers import auth, todos, users, forgot_password, register
 from starlette.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from starlette import status
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Base.metadata.create_all(bind=engine)
 
 app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
+
 
 @app.get("/")
 async def root():
