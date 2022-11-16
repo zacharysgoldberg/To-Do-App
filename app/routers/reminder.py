@@ -8,7 +8,7 @@ def reminder(todo_date: str, email: str, todo_title: str):
     msg = f'Hello, {email} This is a reminder that your todo, "{todo_title}" is today.'
 
     schedule = BlockingScheduler()
-    schedule.add_job(send_email, 'date', run_date=f"{todo_date} 13:55:00",
+    schedule.add_job(send_email, 'date', run_date=f"{todo_date}",
                      args=['Reminder', [email], msg])
     print("==========================")
     schedule.start()
