@@ -28,7 +28,9 @@ async def get_all_by_user(request: Request, db: Session = Depends(get_db)):
     if user is None:
         return RedirectResponse(url='/auth', status_code=status.HTTP_302_FOUND)
 
-    todos = db.query(ToDos).filter(ToDos.user_id == user.get('id')).all()
+    todos = db.query(ToDos).filter(
+        ToDos.user_id == user.get('id')).order_by(ToDos.date).all()
+    print(todos)
 
     return templates.TemplateResponse("home.html", {"request": request, "todos": todos, "user": user})
 
