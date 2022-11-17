@@ -67,4 +67,4 @@ async def get_current_user(request: Request):
         return {'username': username, 'id': user_id}
 
     except JWTError:
-        raise HTTPException(status_code=404, detail="Not found")
+        return None
