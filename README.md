@@ -10,7 +10,9 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx, Doc
 
 ## Features
 
-Reset password, ToDo reminder notifications, and JavaScript FullCalendar CDN.
+* Reset password
+* ToDo reminder notifications
+* JavaScript FullCalendar CDN
 
 ## Hosted on AWS
 
