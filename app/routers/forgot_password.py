@@ -23,7 +23,9 @@ async def forgot_password_view(request: Request):
 
 
 @router.post('/forgot-password', response_class=HTMLResponse)
-async def forgot_password(request: Request, email: str = Form(...),
+async def forgot_password(request: Request,
+                          background_tasks: BackgroundTasks,
+                          email: str = Form(...),
                           db: Session = Depends(get_db)):
     user = db.query(Users).filter(Users.email == email).first()
     if user:
@@ -39,13 +41,13 @@ async def forgot_password(request: Request, email: str = Form(...),
         recipient = [email]
         msg = f"Hello, {email}\n\nA request has been made to reset your password.\nIf this was not made by you, please ignore this message.\nOtherwise, go ahead and follow the link below.\nhttp://{os.getenv('EXTERNAL_IP')}/auth/reset-password/?reset_token={reset_token}\nYour password will not change until you access the link above and create a new one."
 
-        await send_email(subject, recipient, msg)
+        send_email(subject, recipient, msg, background_tasks)
 
         user.reset_token = reset_token
         db.add(user)
         db.commit()
 
-    msg = f"A link has been sent to {email}"
+    msg = f"A link will be sent to {email} if an account exists for it"
     return templates.TemplateResponse('forgot-password.html', {'request': request, 'msg': msg})
 
 

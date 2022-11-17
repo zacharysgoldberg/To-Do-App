@@ -8,6 +8,7 @@ from utils.security import get_current_user
 from datetime import datetime
 from . import templates
 from .reminder import reminder
+from fastapi import BackgroundTasks
 from fastapi.responses import HTMLResponse
 
 router = APIRouter(
@@ -56,7 +57,9 @@ async def add_new_todo(request: Request):
 
 
 @router.post("/add-todo", response_class=HTMLResponse)
-async def create_todo(request: Request, title: str = Form(...),
+async def create_todo(request: Request,
+                      background_tasks: BackgroundTasks,
+                      title: str = Form(...),
                       description: str = Form(...),
                       priority: int = Form(...),
                       date: str = Form(...),
@@ -77,9 +80,9 @@ async def create_todo(request: Request, title: str = Form(...),
     db.add(todo_model)
     db.commit()
 
-    # email = db.query(Users.email).filter(
-    #     Users.username == user['username']).first()
-    # reminder(date, email, title)
+    email = db.query(Users.email).filter(
+        Users.username == user['username']).first()
+    reminder(date, email[0], title, background_tasks)
 
     return RedirectResponse(url="/todos", status_code=status.HTTP_302_FOUND)
 

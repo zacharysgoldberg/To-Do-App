@@ -21,7 +21,7 @@ conf = ConnectionConfig(
 # Sending email
 
 
-async def send_email(subject: str, recipient, message: str):
+def send_email(subject: str, recipient: list, message: str, background_tasks):
     message = MessageSchema(
         subject=subject,
         recipients=recipient,
@@ -30,4 +30,6 @@ async def send_email(subject: str, recipient, message: str):
     )
 
     fm = FastMail(conf)
-    await fm.send_message(message)
+    # await fm.send_message(message)
+    background_tasks.add_task(fm.send_message, message)
+    print("====================")
