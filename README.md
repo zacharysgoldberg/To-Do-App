@@ -18,4 +18,4 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx, Doc
 
 ## Hosted on AWS
 
-[http://todoapp-env.us-west-1.elasticbeanstalk.com//](http://todoapp-env.us-west-1.elasticbeanstalk.com/)
+[http://receipt-manager-env.us-west-1.elasticbeanstalk.com/](http://receipt-manager-env.us-west-1.elasticbeanstalk.com/)
