@@ -1,0 +1,41 @@
+{% include 'base.html' %}
+
+<div class="container">
+  <div class="card text-center">
+    <a class="card-header" href="calendar">Calendar View</a>
+    <h2>Receipts</h2>
+    <div class="card-body">
+      <div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">From</th>
+            <th scope="col">Address</th>
+            <th scope="col">Total</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for receipt in receipts %}
+          <tr class="pointer">
+            <td>{{receipt._from}}</td>
+            <td>{{receipt.address}}</td>
+            <td>{{receipt.purchase_total}}</td>
+            <td>{{receipt.date}}</td>
+            <td>
+              <button onclick="window.location.href='receipt-details/{{receipt.id}}'" type="button"
+                class="btn btn-success">
+                Details
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <a href="add-receipt" class="btn btn-primary">Add Receipt</a>
+    </div>
+  </div>
+</div>

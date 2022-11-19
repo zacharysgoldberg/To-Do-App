@@ -1,0 +1,41 @@
+{% include 'base.html' %}
+
+<div class="container">
+    <div style="max-width:450px;margin:auto;" class="card">
+        <div class="card-header">
+            Update Account
+        </div>
+        <div class="card-body">
+            {% if msg %}
+            {% if msg == "Account updated" %}
+            <div class="alert alert-success" role="alert">
+                {{msg}}
+            </div>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                {{msg}}
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <form class="needs-validation" method="POST" action="/users/update-user">
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="new_email" placeholder="New Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Current Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="new_password" placeholder="New Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button onclick="window.location.href='/users/delete-account'" type="button"
+                    class="btn btn-danger">Delete
+                    Account</button>
+            </form>
+        </div>
+    </div>
+</div>

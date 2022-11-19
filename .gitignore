@@ -1,0 +1,8 @@
+venv
+instance
+seed.py
+.env
+**__pycache__/
+**.pytest_cache/
+**data/
+data.py

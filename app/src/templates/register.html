@@ -1,0 +1,41 @@
+{% include 'base.html' %}
+
+<div class="container">
+  <div style="max-width:450px;margin:auto;" class="card">
+    <div class="card-header">Register</div>
+    <div class="card-body">
+
+      {% if msg %}
+      <div class="alert alert-danger" role="alert">
+        {{msg}}
+      </div>
+      {% endif %}
+
+      <form method="POST" action="/auth/register">
+        <div class="form-group">
+          <input type="username" class="form-control" name="username" placeholder="Username" />
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Email" autofocus />
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email2" placeholder="Confirm Email" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" required />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div>
+    <div class="card-footer text-muted">
+      <a href="/auth"> Already have an account? </a>
+    </div>
+  </div>
+</div>

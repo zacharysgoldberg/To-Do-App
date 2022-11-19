@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block header %}
+{% block title %}{% endblock %}{% endblock %}{% block content %}
+<div class="container">
+    <div class="card text-center">
+        <h2>Totals</h2>
+        <div class="card-body">
+            <div>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Purchase Totals</th>
+                                <th scope="col">Tax Total</th>
+                                <th scope="col">Tax Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for total in totals %}
+                            <tr class="pointer">
+                                <td>{{total.purchase_totals}}</td>
+                                <td>{{total.tax_totals}}</td>
+                                <td>{{total.tax_year}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

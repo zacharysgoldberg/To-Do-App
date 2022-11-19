@@ -1,0 +1,51 @@
+{% include 'base.html' %}
+
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">Receipt Details</div>
+    <div class="card-body">
+      <form method="POST">
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">From</th>
+              <th scope="col">Address</th>
+              <th scope="col">Total</th>
+              <th scope="col">Tax</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Items</th>
+              <th scope="col">Cash</th>
+              <th scope="col">Card</th>
+              <th scope="col">Transaction #</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="pointer">
+
+              <td>{{receipt._from}}</td>
+              <td>{{receipt.address}}</td>
+              <td>{{receipt.purchase_total}}</td>
+              <td>{{receipt.tax}}</td>
+              <td>{{receipt.date}}</td>
+              <td>{{receipt.time}}</td>
+              <td>{{receipt.items_services}}</td>
+              <td>{{receipt.cash}}</td>
+              <td>{{receipt.card}}</td>
+              <td>{{receipt.transaction_number}}</td>
+              <td>{{receipt.link}}</td>
+
+            </tr>
+
+
+          </tbody>
+        </table>
+        <button onclick="window.location.href='/receipts/delete/{{receipt.id}}'" type="button"
+          class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>

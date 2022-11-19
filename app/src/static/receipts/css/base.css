@@ -1,0 +1,26 @@
+body {
+  background: #fafafa;
+  color: #33333a;
+  padding-top: 70px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #323232;
+}
+
+.main-color {
+  background-color: #0e76a8;
+}
+
+@media screen and (min-width: 50px) {
+  .navbar .container-fluid,
+  .navbar-expand-lg .navbar-collapse,
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+}
