@@ -53,7 +53,6 @@ async def update_user(request: Request,
         if user_exists is None:
             user_data.email = new_email
             db.add(user_data)
-            db.commit()
 
         else:
             msg = 'Email is already in use'
@@ -69,9 +68,8 @@ async def update_user(request: Request,
         user_data.password = hashed_password
 
         db.add(user_data)
-        db.commit()
 
-    elif not password and email or password and not email:
+    elif not password and not email:
         msg = 'No changes made'
         return templates.TemplateResponse("update-user.html",
                                           {
@@ -79,7 +77,7 @@ async def update_user(request: Request,
                                               "user": user,
                                               "msg": msg
                                           })
-
+    db.commit()
     return templates.TemplateResponse("update-user.html",
                                       {
                                           "request": request,

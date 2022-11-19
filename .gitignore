@@ -1,8 +1,11 @@
 venv
-instance
-seed.py
-.env
 **__pycache__/
-**.pytest_cache/
-**data/
-data.py
+.env
+**.vscode
+**company/
+backend-secrets.yaml
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+todoapp_dump.sql

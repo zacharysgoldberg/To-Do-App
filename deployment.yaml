@@ -1,0 +1,109 @@
+# Deployment manifest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - image: zgtodoappregistry.azurecr.io/todo-app:v1
+          name: todo-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: todo-app-secrets
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: todo-app-secrets
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: todo-app-secrets
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: name
+                  name: todo-app-secrets
+            - name: MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: mail_username
+                  name: todo-app-secrets
+            - name: MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mail_password
+                  name: todo-app-secrets
+            - name: MAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  key: mail_from
+                  name: todo-app-secrets
+            - name: MAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: mail_port
+                  name: todo-app-secrets
+            - name: MAIL_SERVER
+              valueFrom:
+                secretKeyRef:
+                  key: mail_server
+                  name: todo-app-secrets
+            - name: MAIL_TLS
+              valueFrom:
+                secretKeyRef:
+                  key: mail_tls
+                  name: todo-app-secrets
+            - name: MAIL_SSL
+              valueFrom:
+                secretKeyRef:
+                  key: mail_ssl
+                  name: todo-app-secrets
+            - name: USE_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  key: use_credentials
+                  name: todo-app-secrets
+            # - name: EXTERNAL_IP
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: external_ip
+            #       name: todo-app-secrets
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - todo-app
+              topologyKey: "kubernetes.io/hostname"
+---
+# Service manifest
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-server
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8000
+  selector:
+    app: todo-app
