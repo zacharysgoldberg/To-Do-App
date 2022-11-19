@@ -1,8 +1,9 @@
-# ToDos
+# Receipt Manager
 
 ## Description
 
-To-do list application.
+Submit receipts to account to keep track of expendetures as well as total sales tax spent per fiscal/tax year.
+Totals are calculated respectively.
 
 ## Design
 
@@ -10,9 +11,10 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx, Doc
 
 ## Features
 
-* Reset password
-* ToDo reminder notifications
 * JavaScript FullCalendar CDN
+* Integrated [Receipt-OCR](https://github.com/Asprise/receipt-ocr) API for scanning uploaded receipt files and retrieving/parsing relevant data from them.
+* Password reset
+* Receipt search/lookup.
 
 ## Hosted on AWS
 
