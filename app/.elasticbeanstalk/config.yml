@@ -3,7 +3,7 @@ branch-defaults:
     environment: receipt-manager-env
     group_suffix: null
 environment-defaults:
-  todo-app-env:
+  receipt-manager-env:
     branch: null
     repository: null
 global:
