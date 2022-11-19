@@ -8,4 +8,3 @@ backend-secrets.yaml
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-todoapp_dump.sql

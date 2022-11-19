@@ -7,9 +7,9 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 
-engine = create_engine(os.getenv('DATABASE_URI'))
+# engine = create_engine(os.getenv('DATABASE_URI'))
 # connect_args={"check_same_thread": False} [for Sqlite only]
-# engine = create_engine(os.getenv('DEV_DB'))
+engine = create_engine(os.getenv('DEV_DB'))
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
