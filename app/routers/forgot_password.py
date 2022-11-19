@@ -37,7 +37,7 @@ async def forgot_password(request: Request,
             expires_delta=timedelta(minutes=60)
         )
 
-        subject = "Hello"
+        subject = "[Receipt Manager] Reset Password"
         recipient = [email]
         msg = f"Hello, {user.username}\n\nA request has been made to reset your password.\nIf this was not you, please ignore this message.\nOtherwise, go ahead and follow the link below.\nhttp://{os.getenv('EXTERNAL_IP')}auth/reset-password/?reset_token={reset_token}\nYour password will not change until you access the link above and create a new one."
 
