@@ -179,7 +179,7 @@ async def delete_receipt(request: Request, receipt_id: int, db: Session = Depend
     # total_id = db.query(Total.id).filter(
     #     Total.tax_year == tax_year).first()[0]
     total_model = db.query(Total).filter(Total.tax_year == tax_year).first()
-    subtract_from_total.subtract_from_total('', receipt_model, total_model)
+    subtract_from_total.subtract_from_total('', receipt_model, total_model, db)
 
     db.query(Receipt).filter(Receipt.id == receipt_id).delete()
     db.commit()

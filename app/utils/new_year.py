@@ -18,7 +18,7 @@ def new_year(data, user_id, db):
     total_model = Total(
         purchase_totals=float(purchase_total),
         tax_totals=float(data['tax']),
-        tax_year=int(data['date'][0:4]),
+        tax_year=data['date'][0:4],
         user_id=user_id
     )
     db.add(total_model)

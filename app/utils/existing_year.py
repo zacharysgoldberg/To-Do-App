@@ -6,7 +6,7 @@ from utils.validate import validate_date_time
 
 def existing_year(data, user_id, year, db):
     total_model = db.query(Total).filter(
-        Total.tax_year == int(year)).first()
+        Total.tax_year == year).first()
     print('EXISTING ================================== YEAR')
     # [filter through json object to calculate purchase total]
     purchase_total = 0
