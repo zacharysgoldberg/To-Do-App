@@ -5,16 +5,17 @@ from models import Receipt, Base, User, Total
 from database import engine, get_db
 from sqlalchemy.orm import Session
 from utils.security import get_current_user
-from utils import existing_year, new_year, subtract_from_total
+from utils import existing_year, new_year, subtract_from_total, update_total
 from utils.receipt_ocr import receipt_ocr
 from . import templates
-from .reminder import reminder
-from fastapi import BackgroundTasks
 from fastapi.responses import HTMLResponse
 import shutil
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Callable
+from typing import Callable, Optional
+from datetime import datetime
+# from .reminder import reminder
+# from fastapi import BackgroundTasks
 
 router = APIRouter(
     prefix="/receipts",
@@ -64,7 +65,7 @@ async def add_new_receipt(request: Request):
 
 
 # ==========================================================================================
-
+# Receipt file upload helper functions
 
 def save_upload_file(upload_file: UploadFile, destination: Path) -> None:
     try:
@@ -85,12 +86,7 @@ def save_upload_file_tmp(upload_file: UploadFile) -> Path:
     return tmp_path
 
 
-def handle_upload_file(upload_file: UploadFile, handler: Callable[[Path], None]) -> None:
-    tmp_path = save_upload_file_tmp(upload_file)
-    try:
-        handler(tmp_path)  # Do something with the saved temp file
-    finally:
-        tmp_path.unlink()  # Delete the temp file
+# [Add receipt with uploaded file]
 
 
 @router.post("/add-receipt", response_class=HTMLResponse)
@@ -100,20 +96,60 @@ async def add_receipt(request: Request,
     user = await get_current_user(request)
     if user is None:
         return RedirectResponse(url='/auth', status_code=status.HTTP_302_FOUND)
-
+    # [Uploaded receipt file and save to a temporary path for universal accessibility]
     tmp_path = save_upload_file_tmp(file)
     # print(tmp_path)
     try:
         receipt = receipt_ocr(tmp_path)
     finally:
+        # [remove receipt file from temporary path]
         tmp_path.unlink()
 
     user_id = user.get('id')
 
-    # email = db.query(Users.email).filter(
-    #     Users.username == user['username']).first()
-    # reminder(date, email[0], title, background_tasks)
+    """email = db.query(Users.email).filter(
+        Users.username == user['username']).first()
+    reminder(date, email[0], title, background_tasks)"""
 
+    try:
+        # [add new receipt to existing tax year total]
+        existing_year.existing_year(
+            receipt[0], user_id, receipt[0]['date'][0:4], db)
+    except BaseException:
+        # [add new receipt to new tax year total]
+        new_year.new_year(receipt[0], user_id, db)
+
+    return RedirectResponse(url="/receipts", status_code=status.HTTP_302_FOUND)
+
+
+# [Manually add receipt]
+
+
+@router.post('/add-receipt-manually', response_class=HTMLResponse)
+async def add_receipt_manually(request: Request,
+                               merchant_name: str = Form(...),
+                               total: float = Form(...),
+                               tax: float = Form(...),
+                               merchant_address: str = Form(...),
+                               items_services: str = Form(...),
+                               transaction_number: Optional[str] = Form(None),
+                               card_last_4: Optional[str] = Form(None),
+                               merchant_website: Optional[str] = Form(None),
+                               date: str = Form(...),
+                               time: Optional[str] = Form(None),
+                               db: Session = Depends(get_db)):
+    user = await get_current_user(request)
+    if user is None:
+        return RedirectResponse(url='/auth', status_code=status.HTTP_302_FOUND)
+
+    receipt = [{'merchant_name': merchant_name, 'total': total,
+                'tax': tax, 'merchant_address': merchant_address,
+                'items_services': items_services,
+                'transaction_number': transaction_number if transaction_number else None,
+                'credit_card_number': card_last_4, 'merchant_website': merchant_website,
+                'date': date, 'time': time}]
+
+    user_id = user.get('id')
     try:
         # [add new receipt to existing tax year total]
         existing_year.existing_year(
@@ -139,29 +175,66 @@ async def receipt_details(request: Request, receipt_id: int, db: Session = Depen
     return templates.TemplateResponse("receipt-details.html", {"request": request, "receipt": receipt, "user": user})
 
 
-"""@ router.post('/receipt-detais/{receipt_id}', response_class=HTMLResponse)
-async def edit_receipt_details(request: Request, receipt_id: int,
-                               title: str = Form(...),
-                               description: str = Form(...),
-                               priority: int = Form(...),
-                               date: str = Form(...),
-                               db: Session = Depends(get_db)):
+# TODO: [Update a receipt]
+
+@ router.get('/update-receipt/{receipt_id}', response_class=HTMLResponse)
+async def update_receipt_view(request: Request, receipt_id: int, db: Session = Depends(get_db)):
     user = await get_current_user(request)
     if user is None:
         return RedirectResponse(url='/auth', status_code=status.HTTP_302_FOUND)
 
-    todo_model = db.query(Receipt).filter(Receipt.id == receipt_id).first()
+    receipt = db.query(Receipt).filter(Receipt.id == receipt_id).first()
 
-    todo_model.title = title
-    todo_model.description = description
-    todo_model.priority = priority
-    todo_model.date = date
+    return templates.TemplateResponse("update-receipt.html", {"request": request, "receipt": receipt, "user": user})
 
-    db.add(todo_model)
+
+@ router.post('/update-receipt/{receipt_id}', response_class=HTMLResponse)
+async def update_receipt(request: Request, receipt_id: int,
+                         merchant_name: str = Form(...),
+                         merchant_address: str = Form(...),
+                         total: float = Form(...),
+                         tax: float = Form(...),
+                         date: str = Form(...),
+                         time: str = Form(None),
+                         items_services: str = Form(...),
+                         card_last_4: str = Form(None),
+                         trasnaction_number: str = Form(None),
+                         link: str = Form(None),
+                         db: Session = Depends(get_db)):
+    user = await get_current_user(request)
+    if user is None:
+        return RedirectResponse(url='/auth', status_code=status.HTTP_302_FOUND)
+
+    receipt_model = db.query(Receipt).filter(Receipt.id == receipt_id).first()
+    total_model = db.query(Total).filter(
+        Total.tax_year == str(receipt_model.date)[0:4]).first()
+    user_id = user.get('id')
+
+    subtract_from_total.subtract_from_total(
+        'update', receipt_model, total_model, db)
+
+    receipt_model.merchant_name = merchant_name
+    receipt_model.merchant_address = merchant_address
+    receipt_model.total = total
+    receipt_model.tax = tax
+    receipt_model.date = date
+    receipt_model.time = datetime.strptime(time, '%H:%M')
+    receipt_model.items_services = items_services
+    receipt_model.card_last_4 = card_last_4
+    receipt_model.trasnaction_number = trasnaction_number
+    receipt_model.link = link
+
+    db.add(receipt_model)
+
+    update_total.update_total('update', total_model,
+                              date[0:4], total, tax, user_id, db)
+
     db.commit()
 
-    return RedirectResponse(url="/todos", status_code=status.HTTP_302_FOUND)"""
+    return RedirectResponse(url="/receipts", status_code=status.HTTP_302_FOUND)
 
+
+# [Delete receipt and update totals]
 
 @ router.get('/delete/{receipt_id}')
 async def delete_receipt(request: Request, receipt_id: int, db: Session = Depends(get_db)):
@@ -176,8 +249,7 @@ async def delete_receipt(request: Request, receipt_id: int, db: Session = Depend
         return RedirectResponse(url="/receipts", status_code=status.HTTP_302_FOUND)
 
     tax_year = str(receipt_model.date)[0:4]
-    # total_id = db.query(Total.id).filter(
-    #     Total.tax_year == tax_year).first()[0]
+
     total_model = db.query(Total).filter(Total.tax_year == tax_year).first()
     subtract_from_total.subtract_from_total('', receipt_model, total_model, db)
 

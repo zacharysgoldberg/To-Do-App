@@ -3,17 +3,17 @@
 # [subtract previous receipt amount from respective tax year total]
 
 
-def subtract_from_total(_type, receipt, total, db):
-    if _type == 'purchase':
-        total.purchase_totals = float(
-            total.purchase_totals) - float(receipt.purchase_total)
-
-    elif _type == 'tax':
-        total.tax_totals = float(total.tax_totals) - float(receipt.tax)
+def subtract_from_total(_type, receipt_model, total_model, db):
+    if _type == 'update':
+        total_model.totals = float(
+            total_model.totals) - float(receipt_model.total)
+        total_model.tax_totals = float(
+            total_model.tax_totals) - float(receipt_model.tax)
 
     else:
-        total.purchase_totals = float(
-            total.purchase_totals) - float(receipt.purchase_total)
-        total.tax_totals = float(total.tax_totals) - float(receipt.tax)
+        total_model.totals = float(
+            total_model.totals) - float(receipt_model.total)
+        total_model.tax_totals = float(
+            total_model.tax_totals) - float(receipt_model.tax)
 
     db.commit()

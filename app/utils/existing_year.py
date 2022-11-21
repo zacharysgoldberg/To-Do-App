@@ -7,32 +7,29 @@ from utils.validate import validate_date_time
 def existing_year(data, user_id, year, db):
     total_model = db.query(Total).filter(
         Total.tax_year == year).first()
-    print('EXISTING ================================== YEAR')
+
     # [filter through json object to calculate purchase total]
-    purchase_total = 0
-    for item in data['items']:
-        purchase_total += abs(item['amount'])
+    try:
+        items = filter_items(data['items'])
+        total = abs(data['subtotal'] + data['tax'])
 
-    # [update existing total (tax year)]
-    update_total('sum', total_model, data['date'][0:4],
-                 purchase_total, data['tax'], user_id, db)
-    db.commit()
+    except:
+        items = {'items': data['items_services']}
+        total = abs(data['total'])
 
-    items = filter_items(data['items'])
     date, time = validate_date_time(data['date'], data['time'])
 
     # receipt_model = Receipt()
-    # receipt_model._from = data['merchant_name']
+    # receipt_model.merchant_name = data['merchant_name']
 
     new_receipt = Receipt(
-        _from=data['merchant_name'],
-        purchase_total=float(purchase_total),
+        merchant_name=data['merchant_name'],
+        total=float(total),
         tax=float(data['tax']),
-        address=data['merchant_address'],
+        merchant_address=data['merchant_address'],
         items_services=items,
         transaction_number=str(
             data['transaction_number']) if 'transaction_number' in data else None,
-        cash=True if data['credit_card_number'] is None or data['payment_method'] == 'cash' else None,
         card_last_4=data['credit_card_number'],
         link=data['merchant_website'],
         date=date,
@@ -42,6 +39,10 @@ def existing_year(data, user_id, year, db):
     )
 
     db.add(new_receipt)
+    # [update existing total (tax year)]
+    update_total('sum', total_model, data['date'][0:4],
+                 total, data['tax'], user_id, db)
+
     db.commit()
 
     return new_receipt

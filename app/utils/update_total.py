@@ -2,24 +2,22 @@ from models import Total
 
 
 # [update totals for respective tax year if user supplied tax year input exists]
-def update_total(action, total, year, purchase, tax, user_id, db):
-    if total.tax_year == year and action == 'sum':
-        total.purchase_totals = float(
-            total.purchase_totals) + float(purchase)
-        total.tax_totals = float(total.tax_totals) + float(tax)
+def update_total(action, total_model, year, total, tax, user_id, db):
+    if total_model.tax_year == year and action == 'sum':
+        total_model.totals = round(float(total_model.totals) + float(total), 2)
+        total_model.tax_totals = round(
+            float(total_model.tax_totals) + float(tax), 2)
 
-    elif total.tax_year == year and action == 'update_purchase':
-        total.purchase_totals = float(
-            total.purchase_totals) + float(purchase)
-
-    elif total.tax_year == year and action == 'update_tax':
-        total.tax_totals = float(total.tax_totals) + float(tax)
+    elif total_model.tax_year == year and action == 'update':
+        total_model.totals = round(float(total_model.totals) + float(total), 2)
+        total_model.tax_totals = round(
+            float(total_model.tax_totals) + float(tax), 2)
 
     else:
         # [create new tax year total]
         total = Total(
-            purchase_totals=purchase,
-            tax_totals=tax,
+            totals=round(total, 2),
+            tax_totals=round(tax, 2),
             tax_year=year,
             user_id=user_id
         )

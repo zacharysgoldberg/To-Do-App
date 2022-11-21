@@ -6,10 +6,10 @@
         <div class="card-body">
             <div>
                 <div>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Purchase Totals</th>
+                                <th scope="col">Total</th>
                                 <th scope="col">Tax Total</th>
                                 <th scope="col">Tax Year</th>
                             </tr>
@@ -17,7 +17,7 @@
                         <tbody>
                             {% for total in totals %}
                             <tr class="pointer">
-                                <td>{{total.purchase_totals}}</td>
+                                <td>{{total.totals}}</td>
                                 <td>{{total.tax_totals}}</td>
                                 <td>{{total.tax_year}}</td>
                             </tr>

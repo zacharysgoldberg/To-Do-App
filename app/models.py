@@ -24,7 +24,7 @@ class Total(Base):
     __tablename__ = 'totals'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    purchase_totals = Column(Numeric, nullable=False)
+    totals = Column(Numeric, nullable=False)
     tax_totals = Column(Numeric, nullable=False)
     tax_year = Column(String, nullable=False, index=True)
 
@@ -37,13 +37,12 @@ class Receipt(Base):
     __tablename__ = 'receipts'
 
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
-    _from = Column(String, nullable=False)
-    purchase_total = Column(String, nullable=False)
+    merchant_name = Column(String, nullable=False)
+    total = Column(Numeric, nullable=False)
     tax = Column(Numeric, nullable=False)
-    address = Column(String, nullable=False)
+    merchant_address = Column(String, nullable=False)
     items_services = Column(JSON, nullable=False)
-    transaction_number = Column(String, nullable=True, unique=True)
-    cash = Column(Boolean, nullable=True)
+    transaction_number = Column(String, nullable=True)
     card_last_4 = Column(String(4), nullable=True)
     link = Column(String, nullable=True)
     date = Column(Date, nullable=False)
