@@ -14,7 +14,7 @@ def existing_year(data, user_id, year, db):
         total = abs(data['subtotal'] + data['tax'])
 
     except:
-        items = {'items': data['items_services']}
+        items = data['items_services']
         total = abs(data['total'])
 
     date, time = validate_date_time(data['date'], data['time'])

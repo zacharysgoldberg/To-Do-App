@@ -218,7 +218,7 @@ async def update_receipt(request: Request, receipt_id: int,
     receipt_model.total = total
     receipt_model.tax = tax
     receipt_model.date = date
-    receipt_model.time = datetime.strptime(time, '%H:%M')
+    receipt_model.time = datetime.strptime(time, '%H:%M') if time else None
     receipt_model.items_services = items_services
     receipt_model.card_last_4 = card_last_4
     receipt_model.trasnaction_number = trasnaction_number

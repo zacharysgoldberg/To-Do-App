@@ -13,7 +13,7 @@ def new_year(data, user_id, db):
         total = abs(data['subtotal'] + data['tax'])
 
     except:
-        items = {'items': data['items_services']}
+        items = data['items_services']
         total = abs(data['total'])
 
     # total_model = Total()
