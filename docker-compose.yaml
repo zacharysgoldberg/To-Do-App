@@ -30,3 +30,16 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - "${PWD}:/app/todo-app/psql"
+
+  #[For tests]
+  db-test:
+    image: postgres:14-alpine
+    restart: always
+    container_name: test-db
+    environment:
+      POSTGRES_DB: test-db
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGUSER: postgres
+    ports:
+      - 5433:5432
+  # [docker exec -it [container_name] psql -U [username] -W [db_name]]

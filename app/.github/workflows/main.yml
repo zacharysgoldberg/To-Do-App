@@ -1,0 +1,44 @@
+name: Receipt-Manager push
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9"]
+    environment: RECEIPT_MANAGER
+    env:
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      # DEVELOPMENT_DB: ${{ secrets.DEVELOPMENT_DB }}
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+      # MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Build containers
+        run: docker-compose up -d
+      - name: Install dependencies
+        working-directory: ./app
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # - name: Make database migration
+      #   working-directory: ./app
+      #   run: flask db upgrade
+
+      - name: Run tests
+        working-directory: ./app
+        run: python3 -m unittest discover -v

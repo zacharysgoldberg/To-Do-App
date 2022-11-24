@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv())
+load = load_dotenv(find_dotenv())
 
 
 # connect_args={"check_same_thread": False} [for Sqlite only]
