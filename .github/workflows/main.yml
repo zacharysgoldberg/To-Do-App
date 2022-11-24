@@ -15,7 +15,14 @@ jobs:
       DATABASE_URI: ${{ secrets.DATABASE_URI }}
       # DEVELOPMENT_DB: ${{ secrets.DEVELOPMENT_DB }}
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-      # MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      MAIL_FROM: ${{ secrets.MAIL_FROM }}
+      MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+      MAIL_PORT: ${{ secrets.MAIL_PORT }}
+      MAIL_TLS: ${{ secrets.MAIL_TLS }}
+      MAIL_SSL: ${{ secrets.MAIL_SSL }}
+      USE_CREDENTIALS: ${{ secrets.USE_CREDENTIALS }}
+      EXTERNAL_IP: ${{ secrets.EXTERNAL_IP }}
       PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:

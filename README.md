@@ -7,7 +7,7 @@ Totals are calculated respectively.
 
 ## Design
 
-FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx, Docker, and Kubernetes manifests.
+Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reverse-proxy, PyUnit (Unittest) unit, integration, system tests, and Kubernetes manifests.
 
 ## Features
 
