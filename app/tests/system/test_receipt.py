@@ -57,5 +57,5 @@ class TestReceipt(BaseTest):
     def test_total_found_with_receipt(self):
         pass
 
-    def test_receipt_list(self):
+    def test_get_all_receipts(self):
         pass
