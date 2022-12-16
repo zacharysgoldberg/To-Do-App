@@ -19,6 +19,6 @@ Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic,
 
 - Receipt and Totals search/lookup tool.
 
-## Hosted on AWS
+## Hosted with AWS
 
 [http://receipt-manager-env.us-west-1.elasticbeanstalk.com/](http://receipt-manager-env.us-west-1.elasticbeanstalk.com/)
