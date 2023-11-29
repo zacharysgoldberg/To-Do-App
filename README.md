@@ -7,7 +7,7 @@ Totals are calculated respectively.
 
 ## Design
 
-Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reverse-proxy, PyUnit (Unittest) unit, integration, system tests, and Kubernetes manifests.
+Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reverse-proxy, PyUnit (Unittest) unit, integration, system tests. Streamlined CI/CD by automating building, testing, and deploying using GitHub Actions workflow and Kubernetes deployment and service manifests.
 
 ## Features
 
