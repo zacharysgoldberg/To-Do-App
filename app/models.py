@@ -83,13 +83,13 @@ class Receipt(Base):
     total_id = Column(Integer, ForeignKey('totals.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    def __init__(self, merchant_name: str, total: float, tax: float, address: str,
+    def __init__(self, merchant_name: str, total: float, tax: float, merchant_address: str,
                  items_services: dict, transaction_number: str, card_last_4: str,
                  link: str, date: str, time: str, total_id: int, user_id: int):
         self.merchant_name = merchant_name
         self.total = total
         self.tax = tax
-        self.merchant_address = address
+        self.merchant_address = merchant_address
         self.items_services = items_services
         self.transaction_number = transaction_number
         self.card_last_4 = card_last_4

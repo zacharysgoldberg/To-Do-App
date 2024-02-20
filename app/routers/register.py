@@ -24,7 +24,7 @@ async def register_user(request: Request,
                         email: str = Form(...),
                         email2: str = Form(...),
                         password: str = Form(...),
-                        password2: str = Form(...),
+                        confirm_password: str = Form(...),
                         db: Session = Depends(get_db)):
     validate_username = db.query(User).filter(
         User.username == username).first()
@@ -36,7 +36,7 @@ async def register_user(request: Request,
     if email != email2:
         msg = "Emails do not match"
         return templates.TemplateResponse("register.html", {"request": request, "msg": msg})
-    if password != password2:
+    if password != confirm_password:
         msg = 'Passwords not not match'
         return templates.TemplateResponse("register.html", {"request": request, "msg": msg})
 

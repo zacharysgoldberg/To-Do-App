@@ -29,7 +29,8 @@ def authenticate_user(username: str, password: str, db: Session = Depends(get_db
 
     if not user_by_username and not user_by_email:
         return False
-
+    print("====================")
+    print(password)
     if user_by_username and not verify_password(password, user_by_username.password) \
             or user_by_email and not verify_password(password, user_by_email.password):
         return False

@@ -13,22 +13,23 @@
 
       <form method="POST" action="/auth/register">
         <div class="form-group">
-          <input type="username" class="form-control" name="username" placeholder="Username" autofocus />
+          <input type="username" class="form-control py-2 my-2" name="username" placeholder="Username" autofocus />
         </div>
 
         <div class="form-group">
-          <input type="email" class="form-control" name="email" placeholder="Email" />
+          <input type="email" class="form-control py-2 my-2" name="email" placeholder="Email" />
         </div>
         <div class="form-group">
-          <input type="email" class="form-control" name="email2" placeholder="Confirm Email" />
-        </div>
-
-        <div class="form-group">
-          <input type="password" class="form-control" name="password" placeholder="Password" required />
+          <input type="email" class="form-control py-2 my-2" name="email2" placeholder="Confirm Email" />
         </div>
 
         <div class="form-group">
-          <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required />
+          <input type="password" class="form-control py-2 my-2" name="password" placeholder="Password" required />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control py-2 my-2" name="confirm_password" placeholder="Confirm Password"
+            required />
         </div>
 
         <button type="submit" class="btn btn-primary">Register</button>
