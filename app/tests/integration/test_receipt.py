@@ -3,7 +3,7 @@ import simplejson as json
 from datetime import datetime
 from models import Receipt, User, Total
 from ..base_test import (BaseTest, merchant_name, total,
-                         tax, address, items_services, transaction_number,
+                         tax, merchant_address, items_services, transaction_number,
                          card_last_4, link, date, time)
 from database import load
 
@@ -23,7 +23,7 @@ class ReceiptTest(BaseTest):
             db.add(total_model)
             db.commit()
 
-            receipt = Receipt(merchant_name, total, tax, address, items_services, transaction_number,
+            receipt = Receipt(merchant_name, total, tax, merchant_address, items_services, transaction_number,
                               card_last_4, link, date, datetime.strptime(time, '%H:%M'), total_model.id, user.id)
 
             db.add(receipt)
@@ -56,7 +56,7 @@ class ReceiptTest(BaseTest):
             db.add(total_model)
             db.commit()
 
-            receipt = Receipt(merchant_name, total, tax, address, items_services,
+            receipt = Receipt(merchant_name, total, tax, merchant_address, items_services,
                               transaction_number, card_last_4, link,
                               date, datetime.strptime(time, '%H:%M'), total_model.id, user.id)
 
@@ -81,7 +81,7 @@ class ReceiptTest(BaseTest):
             db.commit()
 
             receipt = Receipt(
-                merchant_name, total, tax, address, items_services,
+                merchant_name, total, tax, merchant_address, items_services,
                 transaction_number, card_last_4, link,
                 date, datetime.strptime(time, '%H:%M'), total_model.id, user.id
             )
@@ -94,7 +94,7 @@ class ReceiptTest(BaseTest):
                 'merchant_name': merchant_name,
                 'total': json.dumps(total, use_decimal=True),
                 'tax': json.dumps(tax, use_decimal=True),
-                'merchant_address': address,
+                'merchant_address': merchant_address,
                 'items_services': items_services,
                 'transaction_number': transaction_number,
                 'card_last_4': card_last_4,

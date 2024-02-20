@@ -21,7 +21,7 @@ and makes sure that it is a new, blank database each time.
 merchant_name = "Test"
 total = 14.50
 tax = 2.50
-address = '123 Address, City State Zip'
+merchant_address = '123 Address, City State Zip'
 items_services = {
     "test_item_service": [
         {
