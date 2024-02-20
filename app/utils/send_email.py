@@ -12,8 +12,8 @@ conf = ConnectionConfig(
     MAIL_FROM=os.getenv("MAIL_FROM"),
     MAIL_PORT=os.getenv("MAIL_PORT"),
     MAIL_SERVER=os.getenv("MAIL_SERVER"),
-    MAIL_TLS=os.getenv("MAIL_TLS"),
-    MAIL_SSL=os.getenv("MAIL_SSL"),
+    MAIL_SSL_TLS=os.getenv("MAIL_SSL_TLS"),
+    MAIL_STARTTLS=os.getenv("MAIL_STARTTLS"),
     USE_CREDENTIALS=os.getenv("USE_CREDENTIALS")
 )
 
@@ -26,7 +26,7 @@ def send_email(subject: str, recipient: list, message: str, background_tasks):
         subject=subject,
         recipients=recipient,
         body=message,
-        subtype='text'
+        subtype='plain'
     )
 
     fm = FastMail(conf)

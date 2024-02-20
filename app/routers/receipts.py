@@ -107,9 +107,9 @@ async def add_receipt(request: Request,
 
     user_id = user.get('id')
 
-    """email = db.query(Users.email).filter(
-        Users.username == user['username']).first()
-    reminder(date, email[0], title, background_tasks)"""
+    # email = db.query(Users.email).filter(
+    #     Users.username == user['username']).first()
+    # reminder(date, email[0], title, background_tasks)
 
     try:
         # [add new receipt to existing tax year total]
