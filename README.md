@@ -7,7 +7,7 @@ Totals are calculated respectively.
 
 ## Design
 
-Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reverse-proxy, PyUnit (Unittest) unit, integration, system tests, and Kubernetes manifests.
+FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reverse-proxy, unit, integration, and system tests. Streamlined CI/CD using GitHub Actions workflow. Automated build using Docker, tests with PyUnit (Unittest), and deployment with Kubernetes manifests.
 
 ## Features
 
@@ -19,6 +19,6 @@ Dockerized FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic,
 
 - Receipt and Totals search/lookup tool.
 
-## Hosted on AWS
+## Live Link
 
-[http://receipt-manager-env.us-west-1.elasticbeanstalk.com/](http://receipt-manager-env.us-west-1.elasticbeanstalk.com/)
+* Link: [http://receipt-manager-env.us-west-1.elasticbeanstalk.com/](http://receipt-manager-env.us-west-1.elasticbeanstalk.com/)
