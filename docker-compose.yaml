@@ -21,7 +21,7 @@ services:
       - db
 
   db:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     ports:
       - 5432:5432
     environment:
@@ -33,7 +33,7 @@ services:
 
   #[For tests]
   db-test:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     restart: always
     container_name: test-db
     environment:

@@ -20,5 +20,7 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker"]
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main:app", "-w", "2", "-k", "uvicorn.workers.UvicornWorker"]
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
