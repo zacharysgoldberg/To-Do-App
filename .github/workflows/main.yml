@@ -2,7 +2,7 @@ name: Receipt-Manager push
 
 on:
   push:
-    branches: main
+    branches: [main]
 
 jobs:
   build:
@@ -19,8 +19,8 @@ jobs:
       MAIL_FROM: ${{ secrets.MAIL_FROM }}
       MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
       MAIL_PORT: ${{ secrets.MAIL_PORT }}
-      MAIL_TLS: ${{ secrets.MAIL_TLS }}
-      MAIL_SSL: ${{ secrets.MAIL_SSL }}
+      MAIL_SSL_TLS: ${{ secrets.MAIL_SSL_TLS }}
+      MAIL_STARTTLS: ${{ secrets.MAIL_STARTTLS }}
       USE_CREDENTIALS: ${{ secrets.USE_CREDENTIALS }}
       EXTERNAL_IP: ${{ secrets.EXTERNAL_IP }}
       PASSWORD: ${{ secrets.PASSWORD }}
