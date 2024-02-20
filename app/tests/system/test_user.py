@@ -14,7 +14,7 @@ class UserTest(BaseTest):
             'email': os.getenv('MAIL_USERNAME'),
             'email2': os.getenv('MAIL_USERNAME'),
             'password': os.getenv('PASSWORD'),
-            'password2': os.getenv('PASSWORD'),
+            'confirm_password': os.getenv('PASSWORD'),
         })
 
         self.assertEqual(response.status_code, 200)
@@ -31,7 +31,7 @@ class UserTest(BaseTest):
             'email': os.getenv('MAIL_USERNAME'),
             'email2': os.getenv('MAIL_USERNAME'),
             'password': os.getenv('PASSWORD'),
-            'password2': os.getenv('PASSWORD'),
+            'confirm_password': os.getenv('PASSWORD'),
         })
 
         response = self.client.post(
@@ -57,14 +57,14 @@ class UserTest(BaseTest):
             'email': os.getenv('MAIL_USERNAME'),
             'email2': os.getenv('MAIL_USERNAME'),
             'password': os.getenv('PASSWORD'),
-            'password2': os.getenv('PASSWORD'),
+            'confirm_password': os.getenv('PASSWORD'),
         })
         response = self.client.post('/auth/register', data={
             'username': os.getenv('MAIL_USERNAME'),
             'email': os.getenv('MAIL_USERNAME'),
             'email2': os.getenv('MAIL_USERNAME'),
             'password': os.getenv('PASSWORD'),
-            'password2': os.getenv('PASSWORD'),
+            'confirm_password': os.getenv('PASSWORD'),
         })
 
         self.assertIn("Email or Username is already in use", response.text)
