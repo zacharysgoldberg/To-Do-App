@@ -61,19 +61,19 @@ tax_year = '2022'
 class BaseTest(TestCase):
     engine = create_engine("postgresql://postgres@localhost:5433/test-db")
 
-    TestSession = sessionmaker(autocommit=False, bind=engine)
+    TestSession = sessionmaker(autocommit = False, bind = engine)
 
     @classmethod
     def setUp(self):
         # [Make sure test database exists]
-        Base.metadata.create_all(bind=self.engine)
+        Base.metadata.create_all(bind = self.engine)
 
         # [Get test client]
         self.client = TestClient(app)
 
     def tearDown(self):
         # [Make sure test database is blank]
-        Base.metadata.drop_all(bind=self.engine)
+        Base.metadata.drop_all(bind = self.engine)
 
 
 def _get_cookie_from_response(response, cookie_name):

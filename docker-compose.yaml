@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  web:
+  app:
     build: ./app
     restart: always
     volumes:
@@ -17,7 +17,7 @@ services:
     ports:
       - 8080:80
     depends_on:
-      - web
+      - app
       - db
 
   db:

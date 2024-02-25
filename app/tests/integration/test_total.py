@@ -3,7 +3,7 @@ from datetime import datetime
 import simplejson as json
 from models import Total, User, Receipt
 from ..base_test import (BaseTest, merchant_name, total, tax,
-                         address, items_services, transaction_number,
+                         merchant_address, items_services, transaction_number,
                          card_last_4, link, date, time,
                          totals, tax_totals, tax_year)
 from database import load
@@ -57,7 +57,7 @@ class TotalTest(BaseTest):
             db.commit()
 
             receipt = Receipt(
-                merchant_name, total, tax, address, items_services,
+                merchant_name, total, tax, merchant_address, items_services,
                 transaction_number, card_last_4, link,
                 date, datetime.strptime(time, '%H:%M'), total_model.id, user.id
             )

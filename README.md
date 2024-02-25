@@ -21,4 +21,4 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reve
 
 ## Live Link
 
-* Link: [http://receipt-manager-env.us-west-1.elasticbeanstalk.com/](http://receipt-manager-env.us-west-1.elasticbeanstalk.com/)
+- Link: [https://receipt-manager.onrender.com](https://receipt-manager.onrender.com)
