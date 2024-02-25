@@ -40,12 +40,11 @@ async def register_user(request: Request,
         msg = 'Passwords not not match'
         return templates.TemplateResponse("register.html", {"request": request, "msg": msg})
 
-    user_model = User()
-    user_model.email = email
-    user_model.username = username
-
-    hashed_password = hash_password(password)
-    user_model.password = hashed_password
+    user_model = User(email=email, username=username, password=hash_password(password))
+    # user_model.email = email
+    # user_model.username = username
+    # hashed_password = hash_password(password)
+    # user_model.password = hashed_password
 
     db.add(user_model)
     db.commit()
