@@ -46,6 +46,10 @@ jobs:
       #   working-directory: ./app
       #   run: flask db upgrade
 
+      - name: Make database migration
+        working-directory: ./app
+        run: alembic upgrade head
+
       - name: Run tests
         working-directory: ./app
         run: python3 -m unittest discover -v
