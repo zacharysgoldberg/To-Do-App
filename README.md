@@ -21,4 +21,4 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reve
 
 ## Live Link
 
-- Link: [https://receipt-manager.onrender.com](https://receipt-manager.onrender.com)
+- [https://receipt-manager.onrender.com](https://receipt-manager.onrender.com)
