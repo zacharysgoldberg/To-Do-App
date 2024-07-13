@@ -12,7 +12,7 @@ FastAPI backend, bootstrap frontend, PostgreSQL, SQLAlchemy, Alembic, Nginx reve
 ## Features
 
 - JavaScript FullCalendar CDN
-- Integrated [Receipt-OCR](https://github.com/Asprise/receipt-ocr) API for scanning uploaded receipt files and retrieving/parsing relevant data from them.
+- Integrated [Receipt-OCR](https://github.com/Asprise/receipt-ocr), a machine learning API for scanning uploaded receipt files and retrieving/parsing relevant data from them.
 - Password recovery
 
 ## Future Improvements
